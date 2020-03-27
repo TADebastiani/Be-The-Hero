@@ -9,11 +9,14 @@ module.exports = {
             .offset((page - 1) * 5)
             .select([
                 'incidents.*',
-                ong= 'ongs.*'
+                'ongs.name',
+                'ongs.email',
+                'ongs.whatsapp',
+                'ongs.city',
+                'ongs.uf'
             ]);
 
         const [count] = await connection('incidents').count('id');
-        console.log(count);
         response.header('X-Total-Count', count['count(`id`)']);
 
         return response.json(incidents);
